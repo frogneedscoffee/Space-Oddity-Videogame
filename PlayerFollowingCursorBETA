@@ -2,42 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovements : MonoBehaviour
+public class PlayerMov : MonoBehaviour
 {
-    [SerializeField]
-    Transform target;
-    [SerializeField]
-    Camera mainCamera;
+    public Camera mainCamera;
 
-    private void Start()
+    // Start is called before the first frame update
+    void Start()
     {
-        if (target == null)
-        {
-            target = transform;
-        }
-
-        if (mainCamera == null)
-        {
-            mainCamera = Camera.main;
-        }
+        Cursor.lockState = CursorLockMode.Confined;
     }
+    
     // Update is called once per frame
     void Update()
     {
-        Vector3 mouseWorldPosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mouseWorldPosition.z = 0;
-
-        Vector3 lookatDirection = mouseWorldPosition - target.position;
-        target.up = lookatDirection;
-
-        if (mouseWorldPosition.x > -7.78 && mouseWorldPosition.x < 0)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-100f * Time.deltaTime, 0));
-        }
-
-        else if (mouseWorldPosition.x < 9.3 && mouseWorldPosition.x > 0)
-        {
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(100f * Time.deltaTime, 0));
-        }
+        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
+        mousePosition.z = 0;
+        transform.position = mousePosition;
     }
 }
