@@ -17,9 +17,4 @@ public class EnemyDamage : MonoBehaviour
             Destroy(gameObject, 7);
         }
     }
-
-    private void FixedUpdate()
-    {
-        Debug.Log(Collider);
-    }
 }
