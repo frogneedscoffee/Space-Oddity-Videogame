@@ -5,23 +5,30 @@ using UnityEngine;
 
 public class Vida : MonoBehaviour
 {
-    public int vida = 7;
-    
-    private void OnTriggerEnter2D(Collider2D collision)
+    public int life = 7;
+
+    public void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(vida);
-
         if (collision.transform.CompareTag("Enemy"))
-        {
-            vida --;
-        }
+            life--;
+    }
 
-        if (vida == 0)
+    void Update()
+    {
+        if (life == 0)
         {
             Destroy(gameObject);
             LevelManager.instance.Respawn();
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
+    private void FixedUpdate()
+    {
+        Debug.Log("Vida Player = " + life);
+    }
+
+    public void Function1(int health)
+    {
+       health = life;
+    }
 }
