@@ -1,0 +1,26 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+
+public class PlayerShoot : MonoBehaviour
+{
+    [SerializeField] private Transform shootercont;
+
+    [SerializeField] private GameObject bullet;
+
+
+    private void Update()
+    {
+        if (Input.GetKeyDown("space"))
+        {
+           Shooter();
+        }
+    }
+
+    private void Shooter()
+    {
+        Instantiate(bullet, shootercont.position, shootercont.rotation);
+    }
+
+}
