@@ -26,3 +26,9 @@ public class Vida : MonoBehaviour
     {
         Debug.Log("Vida Player = " + life);
     }
+
+    public void Function1(int health)
+    {
+       health = life;
+    }
+}
