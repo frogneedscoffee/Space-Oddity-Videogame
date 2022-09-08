@@ -1,26 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System.IO.Ports;
 
 public class PlayerShoot : MonoBehaviour
 {
-    [SerializeField] private Transform shootercont;
+    [SerializeField] private Transform gunController;
 
     [SerializeField] private GameObject bullet;
 
+    public string com;
+
+    private SerialPort port = new SerialPort("COM5", 9600);
+
+
+    void Start()
+    {
+        port.ReadTimeout = 30;
+        port.Open();
+    }
 
     private void Update()
     {
+        try
+        {
+            if (port.IsOpen)
+            {
+                string dato_recibido = port.ReadLine();
+                Debug.Log("Shoot" + dato_recibido);
+            }
+        }catch(System.Exception ex1)
+        {
+            ex1 = new System.Exception(); 
+        }
+
         if (Input.GetKeyDown("space"))
         {
-           Shooter();
+            Shoot();
         }
     }
 
-    private void Shooter()
+    private void Shoot()
     {
-        Instantiate(bullet, shootercont.position, shootercont.rotation);
+        Instantiate(bullet, gunController.position, gunController.rotation);
     }
 
 }
