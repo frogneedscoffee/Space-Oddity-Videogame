@@ -1,0 +1,171 @@
+int pinR=3;
+int pinG=5;
+int pinB=6;
+int Vida= 0;
+int numVida = 0;
+int perdio= 0;
+int intensidadG = 0;
+int intensidadR = 255;
+int intensidadB = 255;
+
+void setup() {
+  pinMode(3,OUTPUT);
+  pinMode(5,OUTPUT);
+  pinMode(6,OUTPUT);
+  Serial.begin(9600);
+}
+void loop() {
+  if (Serial.available() > 0) {
+    Vida = Serial.read();
+    Serial.print("Recibi: ");
+    Serial.println(Vida);
+  } 
+  
+  if(Vida == '9'){ 
+   numVida++;
+   Serial.print("numVida: ");
+   Serial.println(numVida);
+   Vida = 0;
+  }
+
+    if(numVida== 0){
+      intensidadG = 0;
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, 255);
+      analogWrite(pinB, 255);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+    }
+
+if(numVida == 1 && intensidadG<=35 && intensidadR>=50 && intensidadB>=195){
+      if(intensidadG<35){
+        intensidadG=intensidadG+5;}
+      if(intensidadR>50){
+        intensidadR=intensidadR-5;}
+      if(intensidadB>195){
+        intensidadB=intensidadB-5;}
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, intensidadR);
+      analogWrite(pinB, intensidadB);
+      delay(1);
+      Serial.print("intensidadR: ");
+   Serial.println(intensidadR);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+    
+  Serial.print("intensidadB: ");
+   Serial.println(intensidadB);
+    }
+
+if(numVida == 2 && intensidadG>=25 && intensidadR>=35 && intensidadB>=140){    
+      if(intensidadG>25){
+        intensidadG=intensidadG - 5;}
+      if(intensidadR>35){
+        intensidadR=intensidadR - 5;}
+      if(intensidadB>140){
+        intensidadB=intensidadB - 5;}
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, intensidadR);
+      analogWrite(pinB, intensidadB);
+      delay(1);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+      Serial.print("intensidadR: ");
+   Serial.println(intensidadR);
+      Serial.print("intensidadB: ");
+   Serial.println(intensidadB);
+    }
+
+if(numVida == 3 && intensidadG>=10 && intensidadR>=0 && intensidadB>=100){
+      if(intensidadG>10){
+        intensidadG=intensidadG - 5;}
+      if(intensidadR>0){
+        intensidadR=intensidadR - 5;}
+      if(intensidadB>100){
+        intensidadB=intensidadB - 5;}
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, intensidadR);
+      analogWrite(pinB, intensidadB);
+      delay(1);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+      Serial.print("intensidadR: ");
+   Serial.println(intensidadR);
+      Serial.print("intensidadB: ");
+   Serial.println(intensidadB);
+    }
+
+if(numVida == 4 && intensidadG<=20 && intensidadR=0 && intensidadB<=195){
+      if(intensidadG<20){
+        intensidadG=intensidadG + 5;}
+      if(intensidadB<195){
+      intensidadB=intensidadB + 5;
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, 0);
+      analogWrite(pinB, intensidadB);
+      delay(1);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+      Serial.print("intensidadR: ");
+   Serial.println(intensidadR);
+      Serial.print("intensidadB: ");
+   Serial.println(intensidadB);
+    }
+
+if(numVida == 5 && intensidadG<=90 && intensidadR=0 && intensidadB>=100){
+      if(intensidadG<90){
+        intensidadG=intensidadG + 5;}
+      if(intensidadB>100){
+        intensidadB=intensidadB - 5;}
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, 0);
+      analogWrite(pinB, intensidadB);
+      delay(1);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+      Serial.print("intensidadR: ");
+   Serial.println(intensidadR);
+      Serial.print("intensidadB: ");
+   Serial.println(intensidadB);
+    }
+
+if(numVida == 6 && intensidadG<=255 && intensidadR=0 && intensidadB<=255){
+      if(intensidadG<255){
+        intensidadG=intensidadG + 5;}
+      if(intensidadB<255){
+        intensidadB=intensidadB + 5;}
+      analogWrite(pinG, intensidadG);
+      analogWrite(pinR, 0);
+      analogWrite(pinB, intensidadB);
+      delay(1);
+      Serial.print("intensidadG: ");
+   Serial.println(intensidadG);
+      Serial.print("intensidadR: ");
+   Serial.println(intensidadR);
+      Serial.print("intensidadB: ");
+   Serial.println(intensidadB);
+  
+    if(intensidadG==255 && intensidadR==0 && intensidadB==255){
+      analogWrite(pinG, 255);
+      analogWrite(pinR, 0);
+      analogWrite(pinB, 255);
+      delay(500);
+      analogWrite(pinG, 255);
+      analogWrite(pinR, 255);
+      analogWrite(pinB, 255);
+      delay(500);
+    }
+    }
+  
+if(numVida == 7){
+      analogWrite(pinR, 255);
+      analogWrite(pinG, 255);
+      analogWrite(pinB, 255);
+    }
+      }
+
+
+//1, 2, 3 VERDE
+//4, 5 AMARILLO/NARANJA
+//6, 7 ROJO
+
