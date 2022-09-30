@@ -25,14 +25,29 @@ MCUFRIEND_kbv tft;
 void setup() {
   tft.begin(0x9486);
   tft.setRotation(3);
-  tft.fillScreen(MAGENTA);
+  drawHomeScreen();
 }
 
 void loop() {
+ /* tft.fillScreen(MAGENTA);
   tft.setTextColor(BLACK);
   tft.setTextSize(4);
-  tft.setCursor(75,250),
+  tft.setCursor(80,170),
   tft.print("Space Oddity");
-  delay(500);
-  
+  delay(1000); 
+  tft.fillScreen(BLACK);
+  tft.setTextColor(MAGENTA);
+  tft.setTextSize(4);
+  tft.setCursor(80,170),
+  tft.print("Space Oddity");
+  delay(1000);  */
+}
+//320(RGB) x 240
+void drawHomeScreen (){
+  tft.fillScreen(BLACK);
+  tft.setTextColor(MAGENTA);
+  tft.setTextSize(6);
+  tft.setCursor(28, 60),
+  tft.print("SPACE ODDITY");
+  delay(250);
 }
