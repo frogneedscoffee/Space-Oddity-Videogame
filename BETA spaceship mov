@@ -1,0 +1,23 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Spaceship_Mov : MonoBehaviour
+{
+
+public float speed = 1;
+
+void Update()
+ {
+  while (vida > 0)
+  {
+    transform.position += -transform.right * Time.deltaTime * speed;
+    
+    if (position.x == 9.76f)
+      speed = -speed;
+    
+    if (position.x == -7.76f)
+      speed = -speed;
+  }
+ }
+}
