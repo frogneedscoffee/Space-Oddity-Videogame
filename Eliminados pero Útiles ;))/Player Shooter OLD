@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO.Ports;
 
 public class PlayerShoot : MonoBehaviour
-{
+{ 
     [SerializeField] private Transform gunController;
 
     [SerializeField] private GameObject bullet;
