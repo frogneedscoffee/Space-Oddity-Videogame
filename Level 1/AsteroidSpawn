@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class EnemySpawn : MonoBehaviour
+public class AsteroidSpawn : MonoBehaviour
 {
 
     public GameObject[] enemies;
