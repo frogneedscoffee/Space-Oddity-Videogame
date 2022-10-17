@@ -1,0 +1,38 @@
+//video: https://youtu.be/9mgRLhEynC4
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class SpaceshipMov : MonoBehaviour
+{
+    Camera cam;
+    private float xPos;
+    private float yPos;
+    private float mousePos;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        cam = Camera.main;
+    }
+
+    // Update is called once per frame
+    private void Update()
+    {
+        Vector2 mousePos = mousePos();
+
+        xPos = mousePos.x;
+        yPos = mousePos.y;
+
+        transform.position = new Vector2(xPos, yPos);
+    }
+
+    private Vector2 MousePos() 
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        return mousePos;
+    }
+
+}
