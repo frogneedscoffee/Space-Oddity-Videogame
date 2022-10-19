@@ -17,6 +17,13 @@ public class SpaceshipMov : MonoBehaviour
         cam = Camera.main;
     }
 
+    private void Vector2 MousePos()
+    {
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        return mousePos;
+    }
+
     // Update is called once per frame
     private void Update()
     {
@@ -28,11 +35,6 @@ public class SpaceshipMov : MonoBehaviour
         transform.position = new Vector2(xPos, yPos);
     }
 
-    private Vector2 MousePos() 
-    {
-        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
-
-        return mousePos;
-    }
+    
 
 }
