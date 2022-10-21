@@ -1,0 +1,45 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+using UnityEngine;
+
+public class PlayerDamage : MonoBehaviour
+{
+    public float life = 7;
+
+    Animator animator;
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.transform.CompareTag("Missile"))
+            PlayerDamaged();
+
+        else if (other.transform.CompareTag("Enemy"))
+            PlayerDamaged();
+    }
+
+    private void PlayerDamaged()
+    {
+        life--;
+    }
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
+    {
+        if (life <= 0)
+        {
+            animator.Play("PlayerDead");
+            Destroy(gameObject);
+            Time.timeScale = 0;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        Debug.Log("Vida Player = " + life);
+    }
+}
