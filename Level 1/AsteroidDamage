@@ -2,19 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AsteroidDamage : MonoBehaviour
+public class EnemyDamage : MonoBehaviour
 {
-    BoxCollider2D Collider;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void Start()
     {
-        if (collision.transform.CompareTag("Player"))
+        Destroy(gameObject, 4.0f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            other.gameObject.GetComponent<PlayerDamage>().life -= 1;
             Destroy(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject, 7);
         }
     }
 }
