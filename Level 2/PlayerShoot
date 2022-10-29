@@ -4,40 +4,37 @@ using UnityEngine;
 
 public class PlayerShoot : MonoBehaviour
 {
-    public float speed = 3;
     public Bullet bulletprefab;
-    private bool bulletActive;
-
     private bool playerShoot = false;
+    
+    public float speed = 3;
+
+    private float shootRate = 0.5f;
+    private float nextShoot = 0.5f;
 
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > nextShoot)
         {
+            nextShoot = Time.time + shootRate;
             Shoot();
             playerShoot = true;
+        }
+
+        else
+        {
+            playerShoot = false;
         }
     }
 
     private void Shoot()
     {
-        if (!bulletActive)
-        {
-            Bullet bullet = Instantiate(this.bulletprefab, this.transform.position, Quaternion.identity);
-            bullet.destroyed += BulletDestroyed;
-            bulletActive = true;
-        }
-    }
-
-    private void BulletDestroyed()
-    {
-        bulletActive = false;
+        Bullet bullet = Instantiate(this.bulletprefab, this.transform.position, Quaternion.identity);
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("Player shoot = " + playerShoot);
+        Debug.Log("Player Shooting" + playerShoot);
     }
-
 }
