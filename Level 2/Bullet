@@ -8,20 +8,27 @@ public class Bullet : MonoBehaviour
 
     public float speed;
 
-    public System.Action destroyed;
+    private void Start()
+    {
+        Destroy(this.gameObject,4.0f);
+    }
 
     private void Update()
     {
         this.transform.position += this.direction * this.speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if(this.destroyed != null)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
-            this.destroyed.Invoke();
+            other.gameObject.GetComponent<BlueDamage>().life -= 1;
+            Destroy(gameObject);
         }
-        
-        Destroy(this.gameObject);
+
+        else if (other.gameObject.layer == LayerMask.NameToLayer("Boundary"))
+        {
+            Destroy(gameObject);
+        }
     }
 }
