@@ -5,15 +5,9 @@ using UnityEngine;
 
 public class PlayerDamage : MonoBehaviour
 {
-    public float life = 7;
+    public int life = 7;
 
     Animator animator;
-
-    public void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.transform.CompareTag("Enemy"))
-            PlayerDamaged();
-    }
 
     private void PlayerDamaged()
     {
@@ -27,10 +21,11 @@ public class PlayerDamage : MonoBehaviour
 
     private void Update()
     {
-        if (life == 0)
+        if (life <= 0)
         {
-            animator.Play("PlayerDeath");
+            animator.Play("PlayerDead");
             Destroy(gameObject);
+            Time.timeScale = 0;
         }
     }
 
