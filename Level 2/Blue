@@ -10,6 +10,8 @@ public class Blue : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     private int _animationFrame;
 
+    public System.Action killed;
+
     private void Awake()
     {
         _spriteRenderer = GetComponent<SpriteRenderer>();
