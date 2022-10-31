@@ -1,4 +1,4 @@
-using System.Collections;
+ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -35,6 +35,6 @@ public class PlayerShoot : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Debug.Log("Player Shooting" + playerShoot);
+        Debug.Log("Player Shooting " + playerShoot);
     }
 }
