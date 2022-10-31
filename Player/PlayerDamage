@@ -9,11 +9,6 @@ public class PlayerDamage : MonoBehaviour
 
     Animator animator;
 
-    private void PlayerDamaged()
-    {
-        life--;
-    }
-
     private void Start()
     {
         animator = GetComponent<Animator>();
