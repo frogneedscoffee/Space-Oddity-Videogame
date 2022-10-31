@@ -6,17 +6,26 @@ public class PlayerMov : MonoBehaviour
 {
     public Camera mainCamera;
 
-    // Start is called before the first frame update
-    void Start()
+    public ParticleSystem engine;
+
+    private bool fake = true;
+
+    private void Start()
     {
+
+        if (fake == true)
+        {
+            engine.Play();
+        }
+
         Cursor.lockState = CursorLockMode.Confined;
     }
-    
-    // Update is called once per frame
-    void Update()
+
+    private void Update()
     {
         Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0;
         transform.position = mousePosition;
+        engine.transform.position = mousePosition;
     }
 }
