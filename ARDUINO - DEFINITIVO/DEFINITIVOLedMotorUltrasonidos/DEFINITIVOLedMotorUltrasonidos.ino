@@ -1,14 +1,16 @@
+#include <avr/wdt.h> //libreria del watchdog
+
 //ULTRASONIDOS
-const int EchoPin = 5;
-const int TriggerPin = 3;
+#define EchoPin 2
+#define TriggerPin 4
 
 //MOTOR
 int motor = 9;
 
 //LED
-int pinR=3;
+int pinR=6;
 int pinG=5;
-int pinB=6;
+int pinB=3;
 
 //Variables
 String Lectura= "0";
@@ -21,34 +23,41 @@ void setup() {
 
   //MOTOR
   pinMode(motor, OUTPUT);
+  digitalWrite(motor, HIGH);
 
   //LED
   pinMode(pinR,OUTPUT);
   pinMode(pinG,OUTPUT);
   pinMode(pinB,OUTPUT);
+  
   Serial.begin(9600);
+  Serial.println("Holi");
 }
 
 void loop() {
+//ENCENDEMOS ULTRASONIDOS
+  digitalWrite(TriggerPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(TriggerPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(TriggerPin, LOW);
+  int valorEntrada = pulseIn(EchoPin, HIGH);
+  //delayMicroseconds(2);
+  int distancia = valorEntrada/58.2; //valor en cm
+
+
+   if(distancia>7 && distancia<25){
+    Serial.println("PRESS");
+   }
+   delay(100);
+   
+  
 //RECIBIR LECTURA
   if(Serial.available() > 0){
     Lectura = Serial.readStringUntil('\n');
     Lectura = Lectura.substring(0, Lectura.length());
     Serial.println(Lectura);
     }
-
-//ENCENDEMOS ULTRASONIDOS
-  digitalWrite(TriggerPin, HIGH);
-   delay(1);
-   digitalWrite(TriggerPin, LOW);
-   int valorEntrada = pulseIn(EchoPin, HIGH);
-   int distancia = valorEntrada/58.2; //valor en cm
-
-//ENVIAMOS "PRESS"
-   if(distancia>7 && distancia<25){
-    Serial.println("PRESS");
-   }
-   delay(100);
 
 //RECIBE PIERDE VIDA
   if(Lectura =="pierdeVida"){
@@ -58,10 +67,10 @@ void loop() {
     Serial.println(numVida);
 
     //ENCENDEMOS MOTOR
-    analogWrite(motor, 255);
+    digitalWrite(motor, LOW);
     delay(1500);
-    analogWrite(motor, 0);
-    delay(1500);
+    //analogWrite(motor, 0);
+    digitalWrite(motor, HIGH);
     
     Lectura = "0";
   }
@@ -75,7 +84,7 @@ void loop() {
 
     if(numVida== 4 || numVida == 5){
       analogWrite(pinG, 0);
-      analogWrite(pinR, 180);
+      analogWrite(pinR, 100);
       analogWrite(pinB, 255);
     }
 
@@ -94,7 +103,26 @@ void loop() {
       analogWrite(pinR, 255);
       analogWrite(pinB, 255);
       delay(500);
+      analogWrite(pinG, 255);
+      analogWrite(pinR, 0);
+      analogWrite(pinB, 255);
+      delay(500);
+      analogWrite(pinG, 255);
+      analogWrite(pinR, 255);
+      analogWrite(pinB, 255);
+      delay(500);
+      analogWrite(pinG, 255);
+      analogWrite(pinR, 0);
+      analogWrite(pinB, 255);
+      delay(2000);
+
+      reset();
     }
+}
+
+void reset(){
+  wdt_enable(WDTO_15MS);
+  while(1){};
 }
   
 //1, 2, 3 VERDE
