@@ -1,31 +1,48 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO.Ports;
+using Leap.Unity;
 
 public class PlayerMov : MonoBehaviour
 {
+    SerialPort puerto = new SerialPort("COM4", 9600);
+
     public Camera mainCamera;
 
     public ParticleSystem engine;
 
-    private bool fake = true;
+    public CapsuleHand L;
+
+    private float offsetY = 20.0f;
+    private float offsetX = 40.0f;
+
+    private void Awake()
+    {
+        if (puerto.IsOpen)
+        {
+            puerto.WriteLine("YesStart");
+        }
+    }
 
     private void Start()
     {
-
-        if (fake == true)
-        {
-            engine.Play();
-        }
-
-        Cursor.lockState = CursorLockMode.Confined;
+        puerto.ReadTimeout = 40;
+        puerto.Open();
+        engine.Play();
     }
 
     private void Update()
     {
-        Vector3 mousePosition = mainCamera.ScreenToWorldPoint(Input.mousePosition);
-        mousePosition.z = 0;
-        transform.position = mousePosition;
-        engine.transform.position = mousePosition;
+        engine.transform.position = this.transform.position;
+    }
+
+    private void FixedUpdate()
+    {
+        if (L.GetLeapHand() != null)
+        {
+            Vector3 newpos = new Vector3(L.GetLeapHand().PalmPosition.x * offsetX, L.GetLeapHand().PalmPosition.z * offsetY, 0);
+            transform.position = newpos;
+        }
     }
 }
