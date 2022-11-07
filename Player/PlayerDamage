@@ -7,25 +7,19 @@ public class PlayerDamage : MonoBehaviour
 {
     public int life = 7;
 
-    Animator animator;
-
-    private void Start()
-    {
-        animator = GetComponent<Animator>();
-    }
+    public Animator animator;
 
     private void Update()
     {
         if (life <= 0)
         {
             animator.Play("PlayerDead");
-            Destroy(gameObject);
             Time.timeScale = 0;
         }
     }
 
     private void FixedUpdate()
     {
-        Debug.Log("Vida Player = " + life);
+        Debug.Log("Player's life = " + life);
     }
 }
