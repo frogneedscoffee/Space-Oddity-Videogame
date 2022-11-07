@@ -1,4 +1,6 @@
 //LIBRERÍAS
+#include <avr/wdt.h> //libreria del watchdog
+
 #include <SPI.h>          // f.k. for Arduino-1.5.2
 #include "Adafruit_GFX.h"// Hardware-specific library
 #include <MCUFRIEND_kbv.h>
@@ -51,6 +53,12 @@ void loop() {
       drawInGameScreen();
       Lectura="0";
     }
+
+    else if(Lectura=="victory"){
+      drawVictoryScreen();g
+      Lectura="0";
+    }
+    
     else if(Lectura=="muere"){
       drawGameOverScreen();
       Lectura="0";
@@ -70,9 +78,9 @@ void drawHomeScreen (){
   tft.fillScreen(BLACK);
   tft.setTextColor(MAGENTA);
   tft.setTextSize(11);
-  tft.setCursor(80, 60),
+  tft.setCursor(80, 60);
   tft.print("SPACE");
-  tft.setCursor(50, 160),
+  tft.setCursor(50, 160);
   tft.print("ODDITY");
   delay(250);
 
@@ -100,60 +108,60 @@ void drawInGameScreen(){
     tft.fillScreen(BLACK);
     tft.setTextColor(GREEN);
     tft.setTextSize(8);
-    tft.setCursor(28, 80),
+    tft.setCursor(28, 80);
     tft.print("PLAY!");
 
     //VIDAS
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(28, 185),
+    tft.setCursor(28, 185);
     tft.print("Vidas: ");
 
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(310, 185),
+    tft.setCursor(310, 185);
     tft.print("x");
 
     if(numVida==7){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("7");}
     
     else if(numVida==6){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("6");}
 
     else if(numVida==5){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("5");}
 
     else if(numVida==4){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("4");}
 
     else if(numVida==3){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("3");}
 
     else if(numVida==2){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("2");}
 
     else if(numVida==1){
     tft.setTextColor(MAGENTA);
     tft.setTextSize(8);
-    tft.setCursor(370, 185),
+    tft.setCursor(370, 185);
     tft.print("1");}
     
 }
@@ -163,7 +171,7 @@ void drawDamageScreen(){
       tft.fillRect(0, 100, 480, 100, RED);
       tft.setTextColor(WHITE);
       tft.setTextSize(8);
-      tft.setCursor(95, 120),
+      tft.setCursor(95, 120);
       tft.print("DAMAGE");
       delay(500);
       tft.fillScreen(BLACK);
@@ -172,7 +180,7 @@ void drawDamageScreen(){
       tft.fillRect(0, 100, 480, 100, RED);
       tft.setTextColor(WHITE);
       tft.setTextSize(8);
-      tft.setCursor(95, 120),
+      tft.setCursor(95, 120);
       tft.print("DAMAGE");
       delay(500);
 
@@ -185,7 +193,7 @@ void drawGameOverScreen(){
       tft.fillRect(0, 100, 480, 100, RED);
       tft.setTextColor(WHITE);
       tft.setTextSize(7);
-      tft.setCursor(45, 120),
+      tft.setCursor(45, 120);
       tft.print("Game Over!");
       delay(500);
       tft.fillScreen(BLACK);
@@ -194,7 +202,7 @@ void drawGameOverScreen(){
       tft.fillRect(0, 100, 480, 100, RED);
       tft.setTextColor(WHITE);
       tft.setTextSize(7);
-      tft.setCursor(45, 120),
+      tft.setCursor(45, 120);
       tft.print("Game Over!");
       delay(500);
       tft.fillScreen(BLACK);
@@ -203,10 +211,26 @@ void drawGameOverScreen(){
       tft.fillRect(0, 100, 480, 100, RED);
       tft.setTextColor(WHITE);
       tft.setTextSize(7);
-      tft.setCursor(45, 120),
+      tft.setCursor(45, 120);
       tft.print("Game Over!");
       delay(500);
 
-      drawHomeScreen();
+      reset();
     }
-  
+
+void drawVictoryScreen(){
+      tft.fillScreen(BLACK);
+      tft.fillRect(0, 100, 480, 100, GREEN);
+      tft.setTextColor(WHITE);
+      tft.setTextSize(7);
+      tft.setCursor(70, 120);
+      tft.print("VICTORY");
+      delay(2000);
+
+      reset();
+    }
+
+void reset(){
+  wdt_enable(WDTO_15MS);
+  while(1){};
+}
