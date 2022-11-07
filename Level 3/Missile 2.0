@@ -1,0 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Missile_2.0 : MonoBehaviour
+{
+    public Vector2 target;
+    public float speed;
+    
+    public Transform player;
+
+    private void Start()
+    {
+        player = FindGameObjectWithTag("Player").transform;
+        
+        target = new Vector2(player.position.x, player.position.y);
+        
+        Destroy(this.gameObject, 4.0f);
+    }
+
+    private void Update()
+    {
+        transform.position = Vector2.MoveTowards(transform.position, target, speed * Time.deltaTime);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            other.gameObject.GetComponent<PlayerDamage>().life -= 1;
+            Destroy(this.gameObject);
+            GameManager.GM.Missile(this);
+        }
+
+        if (other.gameObject.layer == LayerMask.NameToLayer("Bullet"))
+        {
+            Destroy(this.gameObject);
+            GameManager.GM.Missile(this);
+        }
+    }
+}
