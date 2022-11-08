@@ -68,7 +68,7 @@ void loop() {
 
     //ENCENDEMOS MOTOR
     digitalWrite(motor, LOW);
-    delay(1500);
+    delay(1000);
     //analogWrite(motor, 0);
     digitalWrite(motor, HIGH);
     
