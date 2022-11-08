@@ -114,6 +114,13 @@ void loop() {
       analogWrite(pinG, 255);
       analogWrite(pinR, 0);
       analogWrite(pinB, 255);
+
+      //ENCENDEMOS MOTOR
+    digitalWrite(motor, LOW);
+    delay(2000);
+    //analogWrite(motor, 0);
+    digitalWrite(motor, HIGH);
+      
       delay(2000);
 
       reset();
