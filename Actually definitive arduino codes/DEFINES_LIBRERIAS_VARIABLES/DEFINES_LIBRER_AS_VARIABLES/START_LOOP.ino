@@ -15,7 +15,7 @@ void setup() {
   pinMode(pinB,OUTPUT);
 
   //MOTOR
-  oinMode(MOTOR, OUTPUT);
+  pinMode(MOTOR, OUTPUT);
 
   drawHomeScreen();
   currentPage = "home";

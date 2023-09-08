@@ -119,7 +119,7 @@ void drawDamageScreen(){
 void drawGameOverScreen(){
   tft.fillScreen(BLACK);
 
-  //FALTA MOTOR IVOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+  digitalWrite(MOTOR, HIGH);
   
   for (int i = 0; i < 2; i++){
     analogWrite(pinG, 255);
@@ -142,6 +142,8 @@ void drawGameOverScreen(){
     
     delay(500);
   }
+
+  digitalWrite(MOTOR, LOW);
 
   reset();
 }
