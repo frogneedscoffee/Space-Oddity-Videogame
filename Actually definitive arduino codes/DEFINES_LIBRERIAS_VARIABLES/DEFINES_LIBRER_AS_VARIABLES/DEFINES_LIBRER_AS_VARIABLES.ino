@@ -35,7 +35,7 @@ MCUFRIEND_kbv tft;
 #define pinB 45
 
 //MOTOR
-
+#define MOTOR 43
 
 //--------VARIABLES--------
 String currentPage;
