@@ -64,16 +64,13 @@ void loop(){
     drawGameOverScreen();
   }
 
-  if(Lectura == "1" || Lectura == "2" || Lectura == "3" || Lectura == "4" || Lectura == "5" || Lectura == "6" ||Lectura == "7"){
-    numVida = int(Lectura);
-  }
-
   if (Lectura=="pierdeVida"){
     
     tiempo = millis(); // mide el tiempo que pasó desde que empezó a correr el programa
     
     Serial.print("ENTROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
     Lectura = "";
+    numVida--;
     Serial.print("numVida: ");
     Serial.println(numVida);
 
