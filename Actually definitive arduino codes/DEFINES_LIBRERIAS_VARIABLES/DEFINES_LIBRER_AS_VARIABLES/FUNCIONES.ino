@@ -153,7 +153,7 @@ void drawVictoryScreen(){
   tft.fillRect(0, 100, 480, 100, GREEN);
   tft.setTextColor(WHITE);
   tft.setTextSize(7);
-  tft.setCursor(70, 120);
+  tft.setCursor(95, 120);
   tft.print("VICTORY");
   delay(2000);
 
