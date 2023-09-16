@@ -59,7 +59,7 @@ void loop(){
     drawVictoryScreen();
   }
     
-  if(Lectura=="muere"){
+  if(/*Lectura=="death" || */numVida < 1){
     Lectura="";
     drawGameOverScreen();
   }
@@ -74,7 +74,7 @@ void loop(){
     Serial.print("numVida: ");
     Serial.println(numVida);
 
-    if (tiempo - tiempoanterior > 8000){
+    if (tiempo - tiempoanterior > 12000){
       Serial.println("millis: " +String (tiempo-tiempoanterior));
       //Serial.println("anterior: " +String (tiempoanterior));
 
@@ -103,7 +103,7 @@ void loop(){
     analogWrite(pinB, 255);
   }
 
-  if (numVida == 0 || Lectura=="muere"){
+  /*if (numVida == 0 || Lectura=="muere"){
       for (int i = 0; i < 3; i++){
         analogWrite(pinG, 255);
         analogWrite(pinR, 255);
@@ -120,11 +120,11 @@ void loop(){
       digitalWrite(motor, LOW);
       delay(2000);
       digitalWrite(motor, HIGH);
-      */
+      
       
       delay(2000);
 
       reset();
-    }
+    }*/
     
 }

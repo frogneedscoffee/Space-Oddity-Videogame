@@ -83,6 +83,8 @@ void drawInGameScreen(){
   tft.setTextSize(12);
   tft.setCursor(80, 80);
   tft.print("PLAY!");
+
+  lecturaSerie();
 }
 
 void drawDamageScreen(){
